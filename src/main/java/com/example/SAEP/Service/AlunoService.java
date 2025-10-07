@@ -29,9 +29,9 @@ public class AlunoService {
         AlunoDto alunoDto = new AlunoDto();
         alunoDto.setId(aluno.getId());
         alunoDto.setCpf(aluno.getCpf());
-        alunoDto.setNome(aluno.getNome()); // Corrigido
-        alunoDto.setSobrenome(aluno.getSobrenome()); // Corrigido
-        alunoDto.setCurso(aluno.getCurso()); // Corrigido
+        alunoDto.setNome(aluno.getNome());
+        alunoDto.setSobrenome(aluno.getSobrenome());
+        alunoDto.setCurso(aluno.getCurso());
         return alunoDto;
     }
 
