@@ -17,27 +17,21 @@ public class AlunoService {
 
     public Aluno fromDTO(AlunoDto alunoDTO){
         Aluno aluno = new Aluno();
-
         aluno.setId(alunoDTO.getId());
         aluno.setCpf(alunoDTO.getCpf());
         aluno.setNome(alunoDTO.getNome());
         aluno.setSobrenome(alunoDTO.getSobrenome());
         aluno.setCurso(alunoDTO.getCurso());
-
-
         return aluno;
     }
 
-
     public AlunoDto toDTO(Aluno aluno){
         AlunoDto alunoDto = new AlunoDto();
-
         alunoDto.setId(aluno.getId());
         alunoDto.setCpf(aluno.getCpf());
-        aluno.setNome(aluno.getNome());
-        aluno.setSobrenome(aluno.getSobrenome());
-        aluno.setCurso(aluno.getCurso());
-
+        alunoDto.setNome(aluno.getNome()); // Corrigido
+        alunoDto.setSobrenome(aluno.getSobrenome()); // Corrigido
+        alunoDto.setCurso(aluno.getCurso()); // Corrigido
         return alunoDto;
     }
 
@@ -53,36 +47,31 @@ public class AlunoService {
         }else {
             return Optional.empty();
         }
-    };
+    }
 
     public AlunoDto save(AlunoDto alunoDto){
         Aluno aluno = this.fromDTO(alunoDto);
-
         Aluno alunobd = alunoRepository.save(aluno);
-
         return this.toDTO(alunobd);
     }
 
     public Optional<AlunoDto> updateAluno(Long id, AlunoDto alunoDto){
-
         Optional<Aluno> optionalAluno = alunoRepository.findById(id);
 
         if (optionalAluno.isPresent()){
             Aluno aluno = optionalAluno.get();
-
             aluno.setCpf(alunoDto.getCpf());
             aluno.setNome(alunoDto.getNome());
             aluno.setSobrenome(alunoDto.getSobrenome());
             aluno.setCurso(alunoDto.getCurso());
-
             Aluno alunoupdate = alunoRepository.save(aluno);
-
             return Optional.of(this.toDTO(alunoupdate));
         }else {
             return Optional.empty();
         }
     }
-    public boolean   delete(Long id){
+
+    public boolean delete(Long id){
         if (alunoRepository.existsById(id)){
             alunoRepository.deleteById(id);
             return true;
